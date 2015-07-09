@@ -60,4 +60,88 @@ describe('Update-Mongo test suite.', function() {
       done();
     });
   });
+
+  it('Should be able to handle functions alongside update scripts', function(done) {
+    var stack = [];
+
+    updates.run([
+      function(callback) {
+        stack.push('fn1');
+        callback();
+      },
+      './test/update1.js',
+      function(callback) {
+        stack.push('fn2');
+        callback();
+      }
+    ], function(err, out) {
+      if (err) {
+        throw err;
+      }
+
+      assert.deepEqual(stack, ['fn1', 'fn2']);
+
+      done();
+    });
+  });
+
+  it('Should be able to handle arrays of operations with the update list', function(done) {
+    var stack = [];
+
+    updates.run([
+      [
+        function(callback) {
+          stack.push('fn1');
+          callback();
+        },
+        './test/update1.js',
+        function(callback) {
+          stack.push('fn2');
+          callback();
+        }
+      ]
+    ], function(err, out) {
+      if (err) {
+        throw err;
+      }
+
+      assert.deepEqual(stack, ['fn1', 'fn2']);
+
+      done();
+    });
+  });
+
+  it('Should be able to handle functions alongside update scripts, and arrays of operations with the update list', function(done) {
+    var stack = [];
+
+    updates.run([
+      function(callback) {
+        stack.push('A');
+        callback();
+      },
+      [
+        function(callback) {
+          stack.push('fn1');
+          callback();
+        },
+        './test/update1.js',
+        function(callback) {
+          stack.push('fn2');
+          callback();
+        }
+      ],
+      function(callback) {
+        stack.push('B');
+        callback();
+      },
+    ], function(err, out) {
+      if (err) {
+        throw err;
+      }
+
+      assert.deepEqual(stack, ['A', 'fn1', 'fn2', 'B']);
+
+      done();
+    });
+  });
 });
