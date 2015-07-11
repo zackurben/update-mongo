@@ -30,8 +30,8 @@ describe('Update-Mongo test suite.', function() {
   it('Should be able to run the Mongo update scripts', function(done) {
     // Run the provided update scripts in order, than invoke our callback.
     updates.run([
-      './test/update1.js',
-      './test/update2.js'
+      './update1.js',
+      './update2.js'
     ], function() {
       done();
     });
@@ -69,7 +69,7 @@ describe('Update-Mongo test suite.', function() {
         stack.push('fn1');
         callback();
       },
-      './test/update1.js',
+      './update1.js',
       function(callback) {
         stack.push('fn2');
         callback();
@@ -94,7 +94,7 @@ describe('Update-Mongo test suite.', function() {
           stack.push('fn1');
           callback();
         },
-        './test/update1.js',
+        './update1.js',
         function(callback) {
           stack.push('fn2');
           callback();
@@ -124,7 +124,7 @@ describe('Update-Mongo test suite.', function() {
           stack.push('fn1');
           callback();
         },
-        './test/update1.js',
+        './update1.js',
         function(callback) {
           stack.push('fn2');
           callback();
