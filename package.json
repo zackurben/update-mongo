@@ -1,6 +1,6 @@
 {
   "name": "update-mongo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An easy way to run MongoDB update stripts in Node.",
   "main": "lib/index.js",
   "directories": {

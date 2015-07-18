@@ -1,19 +1,19 @@
-#update-mongo
+# update-mongo
 A simple Node.js Module to run updates for [MongoDB](https://www.mongodb.org/).
 
-#About
+# About
 All commands in the Mongo shell are synchronous and therefore simple to control the flow of execution, but that is not the case with the Native Node.js Driver. Using the `update-mongo` interface, you can easily write scripts for the mongo shell and run them during code execution.
 
  update-mongo allows you to run update scripts for MongoDB without interacting with the [Mongo DB Native NodeJS Driver](https://github.com/mongodb/node-mongodb-native). This is an open source project under the MIT license, see [LICENSE.md](LICENSE.md) for additional information.
 
  **Skip to [Examples](#example) on how to use `update-mongo`**
 
-#Installation
+# Installation
 ```
 npm install --save update-mongo
 ```
 
-#Usage
+# Usage
 One method is provided: `updates.run(scripts, callback);`
 
 See [Scripts](#scripts) for more information on how the scripts are loaded.
@@ -30,7 +30,7 @@ var updates = require('update-mongo')(options);
 updates.run(scripts, callback);
 ```
 
-#Options
+# Options
 The options are given as an object upon loading `update-mongo`. The only required option is, `db`, which defines the database the updates will be run against.
 
 ```javascript
@@ -45,7 +45,7 @@ var options = {
 };
 ```
 
-#Scripts
+# Scripts
 The scripts provided to `updates.run()` can be provided in a few different ways: and array of strings (script file names) to run in-order, a combination of JavaScript functions and strings, or an array of the previous.
 
 __Note: When functions are supplied, the require a single parameter, a callback function, which will be called when the function is complete.__
@@ -66,7 +66,8 @@ updates.run([
   function B(done) { done(); }
 ], callback);
 
-// The order of execution in this example is: script1, function A, script2, function B, script3
+// The order of execution in this example is: script1, function A, script2,
+// function B, script3
 updates.run([
   './script1',
   [
@@ -98,7 +99,7 @@ updates.run([
 ], callback);
 ```
 
-#Example
+# Example
 ```javascript
 var updates = require('update-mongo')({
   db: 'some-test-db'

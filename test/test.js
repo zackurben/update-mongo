@@ -6,10 +6,11 @@ var MongoClient = require('mongodb').MongoClient;
 // Include update-mongo and use the provided test database.
 var updates = require('../lib/index')({db: 'test'});
 
+// The db references.
 var db = null;
 var test = null;
-describe('Update-Mongo test suite.', function() {
 
+describe('Update-Mongo test suite.', function() {
   it('Should be able to connect to mongo', function(done) {
     MongoClient.connect('mongodb://localhost:27017/test', function(err, connection) {
       if (err) {
